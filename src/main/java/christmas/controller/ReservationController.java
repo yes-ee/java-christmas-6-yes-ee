@@ -15,7 +15,7 @@ public class ReservationController {
     DiscountService discountService;
     BadgeService badgeService;
 
-    ReservationController() {
+    public ReservationController() {
         inputView = new InputView();
         outputView = new OutputView();
         dateService = new DateService();
