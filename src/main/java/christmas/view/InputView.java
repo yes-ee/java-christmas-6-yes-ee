@@ -1,15 +1,16 @@
 package christmas.view;
 
 import christmas.constant.ServiceMessage;
+import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-    public String inputDate() {
+    public static String inputDate() {
         System.out.println(ServiceMessage.INPUT_DATE.getMessage());
-        return System.console().readLine();
+        return Console.readLine();
     }
 
-    public String inputMenu() {
+    public static String inputMenu() {
         System.out.println(ServiceMessage.INPUT_MENU.getMessage());
-        return System.console().readLine();
+        return Console.readLine();
     }
 }
