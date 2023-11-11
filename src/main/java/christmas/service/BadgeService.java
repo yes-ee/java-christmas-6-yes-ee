@@ -1,2 +1,5 @@
-package christmas.service;public class BadgeService {
+package christmas.service;
+
+public class BadgeService {
+
 }

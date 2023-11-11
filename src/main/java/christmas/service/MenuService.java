@@ -1,2 +1,5 @@
-package christmas.service;public class MenuService {
+package christmas.service;
+
+public class MenuService {
+
 }
