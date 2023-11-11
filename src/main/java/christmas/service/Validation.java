@@ -4,7 +4,7 @@ import christmas.constant.ErrorMessage;
 import christmas.constant.ServiceNumber;
 
 public class Validation {
-    public static void checkDate(String input) {
+    public static int checkDate(String input) {
         int date;
 
         try {
@@ -18,6 +18,8 @@ public class Validation {
             throw new IllegalArgumentException(
                     ErrorMessage.ERROR_PREFIX.getMessage() + ErrorMessage.DATE_WRONG.getMessage());
         }
+
+        return date;
     }
 
 }

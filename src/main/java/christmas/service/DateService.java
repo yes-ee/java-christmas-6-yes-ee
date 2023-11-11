@@ -3,7 +3,7 @@ package christmas.service;
 import christmas.view.InputView;
 
 public class DateService {
-    int date = 0;
+    private int date = 0;
 
     public void chooseDate() {
         boolean isInputValid = false;
@@ -12,7 +12,7 @@ public class DateService {
             try {
                 String input = InputView.inputDate();
 
-                Validation.checkDate(input);
+                date = Validation.checkDate(input);
                 isInputValid = true;
             } catch (IllegalArgumentException e){
                 System.out.println(e.getMessage());
@@ -20,4 +20,7 @@ public class DateService {
         }
     }
 
+    public int getDate() {
+        return date;
+    }
 }
