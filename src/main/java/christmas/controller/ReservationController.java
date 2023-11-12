@@ -4,6 +4,7 @@ import christmas.service.BadgeService;
 import christmas.service.DateService;
 import christmas.service.DiscountService;
 import christmas.service.MenuService;
+import christmas.view.OutputView;
 
 public class ReservationController {
     DateService dateService;
@@ -31,6 +32,7 @@ public class ReservationController {
 
     private void selectMenu() {
         menuService.chooseMenu();
+        OutputView.printOrder(menuService.getOrderList());
     }
 
     private void applyDiscount() {
