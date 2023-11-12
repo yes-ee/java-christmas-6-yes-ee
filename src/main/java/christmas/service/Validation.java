@@ -3,7 +3,6 @@ package christmas.service;
 import christmas.constant.ErrorMessage;
 import christmas.constant.ServiceNumber;
 import christmas.domain.Menu;
-import christmas.domain.MenuList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +26,6 @@ public class Validation {
     }
 
     public static Map<Menu, Integer> checkMenu(String input) {
-        MenuList menuList = new MenuList();
         Map<Menu, Integer> orderList = new HashMap<>();
 
         String [] orders = input.split(",");
