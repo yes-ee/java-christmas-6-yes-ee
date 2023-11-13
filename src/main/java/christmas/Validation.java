@@ -16,6 +16,12 @@ public class Validation {
         }
     }
 
+    public static void validateSplitOrder(String[] splitOrder) {
+        if (splitOrder.length != 2) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public static void validateMenu(Menu orderMenu, Map<Menu, Integer> orderList) {
         checkMenuExist(orderMenu);
         checkMenuDuplicate(orderMenu, orderList);
@@ -68,5 +74,4 @@ public class Validation {
             throw new IllegalArgumentException();
         }
     }
-
 }

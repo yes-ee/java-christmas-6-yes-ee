@@ -33,7 +33,7 @@ public class MenuService {
         for (String order: orders) {
             String [] splitOrder = order.split("-");
 
-            checkSplitOrder(splitOrder);
+            Validation.validateSplitOrder(splitOrder);
             Menu orderMenu = Menu.getMenu(splitOrder[0]);
             Validation.validateMenu(orderMenu, orderList);
 
@@ -41,8 +41,4 @@ public class MenuService {
         }
     }
 
-    private void checkSplitOrder(String[] splitOrder) {
-        if (splitOrder.length != 2)
-            throw new IllegalArgumentException();
-    }
 }
