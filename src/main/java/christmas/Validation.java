@@ -34,6 +34,7 @@ public class Validation {
 
     public static void validateOrderList(Map<Menu, Integer> orderList) {
         checkOrderListCount(orderList);
+        checkOrderDrinkOnly(orderList);
     }
 
     private static void checkOrderListCount(Map<Menu, Integer> orderList) {
@@ -52,4 +53,20 @@ public class Validation {
 
         return orderSum;
     }
+
+    private static void checkOrderDrinkOnly(Map<Menu, Integer> orderList) {
+        boolean onlyDrink = true;
+
+        for (Menu order : orderList.keySet()) {
+            if (order.getType() != "drink") {
+                onlyDrink = false;
+                break;
+            }
+        }
+
+        if (onlyDrink) {
+            throw new IllegalArgumentException();
+        }
+    }
+
 }

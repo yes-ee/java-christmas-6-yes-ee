@@ -19,8 +19,8 @@ public class MenuService {
                 orderList.clear();
 
                 String [] orders = InputView.inputMenu().split(",");
-
                 makeOrderList(orders);
+                Validation.validateOrderList(orderList);
 
                 isMenuValid = true;
             } catch (IllegalArgumentException e) {
