@@ -31,4 +31,25 @@ public class Validation {
             throw new IllegalArgumentException();
         }
     }
+
+    public static void validateOrderList(Map<Menu, Integer> orderList) {
+        checkOrderListCount(orderList);
+    }
+
+    private static void checkOrderListCount(Map<Menu, Integer> orderList) {
+        int orderSum = getOrderSum(orderList);
+
+        if (orderSum > ServiceNumber.MENU_MAX.getNumber())
+            throw new IllegalArgumentException();
+    }
+
+    private static int getOrderSum(Map<Menu, Integer> orderList) {
+        int orderSum = 0;
+
+        for (Menu order: orderList.keySet()) {
+            orderSum += orderList.get(order);
+        }
+
+        return orderSum;
+    }
 }
