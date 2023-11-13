@@ -11,7 +11,7 @@ public class ReservationController {
     private DiscountService discountService;
     private BadgeService badgeService;
 
-    ReservationController() {
+     public ReservationController() {
         dateService = new DateService();
         menuService = new MenuService();
         discountService = new DiscountService();
