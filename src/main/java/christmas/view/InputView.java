@@ -9,4 +9,8 @@ public class InputView {
         return Console.readLine();
     }
 
+    public static String inputMenu() {
+        System.out.println(ServiceMessage.INPUT_MENU.getMessage());
+        return Console.readLine();
+    }
 }
