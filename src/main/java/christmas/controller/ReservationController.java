@@ -30,6 +30,7 @@ public class ReservationController {
     }
 
     private void selectMenu() {
+        menuService.chooseMenu();
     }
 
     private void applyDiscount() {

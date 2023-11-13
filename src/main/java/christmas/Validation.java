@@ -1,6 +1,8 @@
 package christmas;
 
 import christmas.constant.ServiceNumber;
+import christmas.domain.Menu;
+import java.util.Map;
 
 public class Validation {
 
@@ -14,4 +16,19 @@ public class Validation {
         }
     }
 
+    public static void validateMenu(Menu orderMenu, Map<Menu, Integer> orderList) {
+        checkMenuExist(orderMenu);
+        checkMenuDuplicate(orderMenu, orderList);
+    }
+
+    private static void checkMenuExist(Menu orderMenu) {
+        if (orderMenu == null)
+            throw new IllegalArgumentException();
+    }
+
+    private static void checkMenuDuplicate(Menu orderMenu, Map<Menu, Integer> orderList) {
+        if (orderList.containsKey(orderMenu)) {
+            throw new IllegalArgumentException();
+        }
+    }
 }

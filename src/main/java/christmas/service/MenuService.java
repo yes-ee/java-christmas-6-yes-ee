@@ -1,13 +1,15 @@
 package christmas.service;
 
+import christmas.Validation;
 import christmas.constant.ErrorMessage;
 import christmas.domain.Menu;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MenuService {
-    private Map<Menu, Integer> orderList;
+    private Map<Menu, Integer> orderList = new HashMap<>();
 
     public void chooseMenu() {
         boolean isMenuValid = false;
@@ -32,6 +34,10 @@ public class MenuService {
             String [] splitOrder = order.split("-");
 
             checkSplitOrder(splitOrder);
+            Menu orderMenu = Menu.getMenu(splitOrder[0]);
+            Validation.validateMenu(orderMenu, orderList);
+
+            orderList.put(orderMenu, Integer.parseInt(splitOrder[1]));
         }
     }
 
