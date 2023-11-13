@@ -39,4 +39,18 @@ public class MenuServiceTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("같은 메뉴 여러 번 입력한 경우")
+    @Test
+    void menuDuplicate() {
+        // given
+        Menu orderMenu = Menu.BABY_BACK_RIBS;
+        Map<Menu, Integer> orderList = new HashMap<>();
+        orderList.put(Menu.BABY_BACK_RIBS, 1);
+
+        // then
+        assertThatThrownBy(
+                () -> Validation.validateMenu(orderMenu, orderList))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
