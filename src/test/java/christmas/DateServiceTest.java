@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+@DisplayName("날짜 서비스 테스트")
 public class DateServiceTest {
 
     @DisplayName("날짜에 숫자 아닌 값 들어오는 경우 예외 테스트")
