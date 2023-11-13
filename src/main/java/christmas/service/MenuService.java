@@ -41,4 +41,7 @@ public class MenuService {
         }
     }
 
+    public Map<Menu, Integer> getOrderList() {
+        return orderList;
+    }
 }
