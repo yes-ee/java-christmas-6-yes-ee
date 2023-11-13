@@ -26,6 +26,7 @@ public class ReservationController {
     }
 
     private void selectDate() {
+         dateService.chooseDate();
     }
 
     private void selectMenu() {
