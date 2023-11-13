@@ -17,7 +17,8 @@ public class OutputView {
             String menuName = order.getName();
             int count = orderList.get(order);
 
-            System.out.printf("%s %d개\n", menuName, count);
+            System.out.printf("%s %d개", menuName, count);
+            System.out.println();
         }
     }
 }
