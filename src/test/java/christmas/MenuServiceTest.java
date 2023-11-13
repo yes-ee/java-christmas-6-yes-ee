@@ -53,4 +53,18 @@ public class MenuServiceTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("주문한 개수 20개 넘어간 경우")
+    @Test
+    void menuCountMoreThan20() {
+        // given
+        Map<Menu, Integer> orderList = new HashMap<>();
+        orderList.put(Menu.BABY_BACK_RIBS, 10);
+        orderList.put(Menu.CAESAR_SALAD, 10);
+        orderList.put(Menu.CHRISTMAS_PASTA, 1);
+
+        // then
+        assertThatThrownBy(
+                () -> Validation.validateOrderList(orderList))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
