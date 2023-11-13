@@ -67,4 +67,17 @@ public class MenuServiceTest {
                 () -> Validation.validateOrderList(orderList))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("음료 메뉴만 주문한 경우")
+    @Test
+    void orderDrinkOnly() {
+        // given
+        Map<Menu, Integer> orderList = new HashMap<>();
+        orderList.put(Menu.RED_WINE, 2);
+
+        // then
+        assertThatThrownBy(
+                () -> Validation.validateOrderList(orderList))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
