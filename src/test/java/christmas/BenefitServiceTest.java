@@ -121,7 +121,7 @@ public class BenefitServiceTest {
 
     @DisplayName("증정 이벤트 해당 안 되는 경우 금액 확인")
     @Test
-    void notGiveawayEvent() {
+    void checkBenefitPriceWhenNotGiveaway() {
         // given
         MenuService menuService = new MenuService();
         menuService.addOrder(Menu.BABY_BACK_RIBS, 2);
@@ -134,4 +134,18 @@ public class BenefitServiceTest {
         assertThat(giveawayService.getBenefitPrice()).isEqualTo(0);
     }
 
+    @DisplayName("증정 이벤트 해당 안 되는 경우 주문 내역 확인")
+    @Test
+    void checkOrderListWhenNotGiveaway() {
+        // given
+        MenuService menuService = new MenuService();
+        menuService.addOrder(Menu.BABY_BACK_RIBS, 2);
+        GiveawayService giveawayService = new GiveawayService();
+
+        // when
+        giveawayService.applyGiveaway(menuService.getOrderPrice());
+
+        // then
+        assertThat(menuService.getOrderList().keySet()).doesNotContain(Menu.CHAMPAGNE);
+    }
 }
