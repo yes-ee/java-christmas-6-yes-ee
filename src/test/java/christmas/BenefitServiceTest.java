@@ -4,6 +4,7 @@ import christmas.domain.Menu;
 import christmas.service.DdayDiscountService;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.service.SpecialDiscountService;
 import christmas.service.WeekdayDiscountService;
 import christmas.service.WeekendDiscountService;
 import java.util.HashMap;
@@ -62,6 +63,21 @@ public class BenefitServiceTest {
 
         // when
         discountService.applyDiscount(date, orderList);
+        int discountPrice = discountService.getBenefitPrice();
+
+        // then
+        assertThat(discountPrice).isEqualTo(expected);
+    }
+
+    @DisplayName("특별 할인 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1:0", "2:0", "3:1000", "10:1000", "17: 1000", "24:1000", "25:1000", "26:0"}, delimiter = ':')
+    void specialDiscount(int date, int expected) {
+        // given
+        SpecialDiscountService discountService = new SpecialDiscountService();
+
+        // when
+        discountService.applyDiscount(date);
         int discountPrice = discountService.getBenefitPrice();
 
         // then
