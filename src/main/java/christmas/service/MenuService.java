@@ -34,13 +34,19 @@ public class MenuService {
             String [] splitOrder = order.split("-");
 
             Validation.validateSplitOrder(splitOrder);
+
             Menu orderMenu = Menu.getMenu(splitOrder[0]);
             int orderCount = Integer.parseInt(splitOrder[1]);
+
             Validation.validateMenu(orderMenu, orderList);
             Validation.validateCount(orderCount);
 
-            orderList.put(orderMenu, Integer.parseInt(splitOrder[1]));
+            addOrder(orderMenu, orderCount);
         }
+    }
+
+    public void addOrder(Menu menu, int count) {
+        orderList.put(menu, count);
     }
 
     public Map<Menu, Integer> getOrderList() {
