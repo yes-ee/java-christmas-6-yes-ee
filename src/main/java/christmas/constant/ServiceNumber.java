@@ -7,7 +7,7 @@ public enum ServiceNumber {
     MENU_MAX(20),
     EVENT_MIN_PRICE(10000),
     DDAY_DISCOUNT_END(25),
-    FREE_EVENT_MIN_PRICE(120000);
+    GIVEAWAY_EVENT_MIN_PRICE(120000);
 
     private int number;
 
