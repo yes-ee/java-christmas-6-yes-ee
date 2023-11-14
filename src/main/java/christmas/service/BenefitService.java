@@ -11,16 +11,18 @@ public class BenefitService {
     int benefitPrice = 0;
     Map<Menu, Integer> orderList;
     Map<Benefit, Integer> benefitList = new HashMap<>();
+    MenuService menuService;
     DdayDiscountService ddayDiscountService;
     WeekdayDiscountService weekdayDiscountService;
     WeekendDiscountService weekendDiscountService;
     SpecialDiscountService specialDiscountService;
     GiveawayService giveawayService;
 
-    public BenefitService(int date, Map<Menu, Integer> orderList, int orderPrice) {
+    public BenefitService(int date, MenuService menuService) {
+        this.menuService = menuService;
         this.date = date;
-        this.orderList = orderList;
-        this.orderPrice = orderPrice;
+        this.orderList = menuService.getOrderList();
+        this.orderPrice = menuService.getOrderPrice();
         ddayDiscountService = new DdayDiscountService();
         weekdayDiscountService = new WeekdayDiscountService();
         weekendDiscountService = new WeekendDiscountService();
@@ -59,11 +61,18 @@ public class BenefitService {
     private void applyGiveaway() {
         giveawayService.applyGiveaway(orderPrice);
         addBenefitToList(Benefit.GIVEAWAY_EVENT, giveawayService.getBenefitPrice());
+        addGiveawayMenuToOrderList(giveawayService.getBenefitPrice());
     }
 
     private void addBenefitToList(Benefit benefit, int benefitPrice) {
         if (benefitPrice != 0) {
             benefitList.put(benefit, benefitPrice);
+        }
+    }
+
+    public void addGiveawayMenuToOrderList(int benefitPrice) {
+        if (benefitPrice != 0) {
+            menuService.addOrder(giveawayService.getGiveawayMenu(), giveawayService.getGiveawayMenuCount());
         }
     }
 

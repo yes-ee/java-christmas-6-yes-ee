@@ -33,7 +33,7 @@ public class ReservationController {
 
     private void checkEvent() {
         eventService = new EventService(
-                dateService.getDate(), menuService.getOrderList(), menuService.getOrderPrice());
+                dateService.getDate(), menuService);
 
         if (!eventService.isEventTarget(menuService.getOrderPrice())) {
             return;

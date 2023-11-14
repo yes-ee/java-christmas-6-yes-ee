@@ -8,18 +8,19 @@ public class EventService {
     int date;
     private Map<Menu, Integer> orderList;
     private int orderPrice;
-
+    private MenuService menuService;
     private BenefitService benefitService;
     private BadgeService badgeService;
 
-    public EventService(int date, Map<Menu, Integer> orderList, int orderPrice) {
+    public EventService(int date, MenuService menuService) {
+        this.menuService = menuService;
         this.date = date;
-        this.orderList = orderList;
-        this.orderPrice = orderPrice;
+        this.orderList = menuService.getOrderList();
+        this.orderPrice = menuService.getOrderPrice();
     }
 
     public void applyEvent() {
-        benefitService = new BenefitService(date, orderList, orderPrice);
+        benefitService = new BenefitService(date, menuService);
         badgeService = new BadgeService(benefitService.getBenefitPrice());
 
         benefitService.applyBenefit();
