@@ -12,10 +12,10 @@ public class EventService {
     private DiscountService discountService;
     private BadgeService badgeService;
 
-    public EventService(int date, MenuService menuService) {
+    public EventService(int date, Map<Menu, Integer> orderList, int orderPrice) {
         this.date = date;
-        this.orderList = menuService.getOrderList();
-        this.orderPrice = menuService.getOrderPrice();
+        this.orderList = orderList;
+        this.orderPrice = orderPrice;
     }
 
     public void applyEvent() {

@@ -32,7 +32,8 @@ public class ReservationController {
     }
 
     private void applyEvent() {
-        eventService = new EventService(dateService.getDate(), menuService);
+        eventService = new EventService(
+                dateService.getDate(), menuService.getOrderList(), menuService.getOrderPrice());
 
         if (!eventService.isEventTarget(menuService.getOrderPrice())) {
             return;
