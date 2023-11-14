@@ -1,11 +1,14 @@
 package christmas;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import christmas.domain.Menu;
+import christmas.service.MenuService;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("메뉴 서비스 테스트")
@@ -50,6 +53,18 @@ public class MenuServiceTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("메뉴 개수 0개인 경우")
+    @Test
+    void menuCount0() {
+        // given
+        int orderCount = 0;
+
+        // then
+        assertThatThrownBy(
+                () -> Validation.validateCount(orderCount))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @DisplayName("주문한 개수 20개 넘어간 경우")
     @Test
     void menuCountMoreThan20() {
@@ -77,4 +92,17 @@ public class MenuServiceTest {
                 () -> Validation.validateOrderList(orderList))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+//    @DisplayName("총주문 금액 계산 기능")
+//    @Test
+//    void orderPrice() {
+//        // given
+//        MenuService menuService = new MenuService();
+//
+//        // when
+//        int orderPrice = menuService.getOrderPrice();
+//
+//        // then
+//        assertThat(orderPrice).isEqualTo(100000);
+//    }
 }
