@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BenefitService {
+    private int totalDiscountPrice;
+
     private int date;
     private int orderPrice;
     private Map<Menu, Integer> orderList;
@@ -69,17 +71,22 @@ public class BenefitService {
         }
     }
 
-    public int getBenefitPriceSum() {
+    public int getTotalBenefitPrice() {
         return benefitList.values().stream()
             .mapToInt(Integer::intValue)
             .sum();
     }
 
+    public int getDiscountedPrice() {
+        calculateTotalDiscountPrice();
+        return menuService.getOrderPrice() - totalDiscountPrice;
+    }
 
-    public int getDiscountPriceSum() {
-        return benefitList.keySet().stream()
-            .filter(benefit -> benefit.getType() == "discount")
-            .mapToInt(benefit -> benefitList.get(benefit))
-            .sum();
+    private void calculateTotalDiscountPrice() {
+        totalDiscountPrice =  benefitList.keySet().stream()
+                .filter(benefit -> benefit.getType() == "discount")
+                .mapToInt(benefit -> benefitList.get(benefit))
+                .sum();
     }
 }
+

@@ -4,7 +4,6 @@ import christmas.constant.ServiceNumber;
 
 public class EventService {
     int date;
-    int discountedPrice;
     private MenuService menuService;
     private BenefitService benefitService;
     private BadgeService badgeService;
@@ -16,22 +15,15 @@ public class EventService {
 
     public void applyEvent() {
         benefitService = new BenefitService(date, menuService);
-        badgeService = new BadgeService(benefitService.getBenefitPriceSum());
+        badgeService = new BadgeService(benefitService.getTotalBenefitPrice());
 
         benefitService.applyBenefit();
         badgeService.applyBadge();
-        calculateDiscountedPrice();
     }
 
     public boolean isEventTarget(int orderPrice) {
         return orderPrice >= ServiceNumber.EVENT_MIN_PRICE.getNumber();
     }
 
-    private void calculateDiscountedPrice() {
-        discountedPrice = menuService.getOrderPrice() - benefitService.getDiscountPriceSum();
-    }
 
-    public int getDiscountedPrice() {
-        return discountedPrice;
-    }
 }
