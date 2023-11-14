@@ -76,4 +76,10 @@ public class BenefitService {
     }
 
 
+    public int getDiscountPriceSum() {
+        return benefitList.keySet().stream()
+            .filter(benefit -> benefit.getType() == "discount")
+            .mapToInt(benefit -> benefitList.get(benefit))
+            .sum();
+    }
 }

@@ -1,13 +1,10 @@
 package christmas.service;
 
 import christmas.constant.ServiceNumber;
-import christmas.domain.Menu;
-import java.util.Map;
 
 public class EventService {
     int date;
-    private Map<Menu, Integer> orderList;
-    private int orderPrice;
+    int discountedPrice;
     private MenuService menuService;
     private BenefitService benefitService;
     private BadgeService badgeService;
@@ -15,8 +12,6 @@ public class EventService {
     public EventService(int date, MenuService menuService) {
         this.menuService = menuService;
         this.date = date;
-        this.orderList = menuService.getOrderList();
-        this.orderPrice = menuService.getOrderPrice();
     }
 
     public void applyEvent() {
@@ -25,9 +20,18 @@ public class EventService {
 
         benefitService.applyBenefit();
         badgeService.applyBadge();
+        calculateDiscountedPrice();
     }
 
     public boolean isEventTarget(int orderPrice) {
         return orderPrice >= ServiceNumber.EVENT_MIN_PRICE.getNumber();
+    }
+
+    private void calculateDiscountedPrice() {
+        discountedPrice = menuService.getOrderPrice() - benefitService.getDiscountPriceSum();
+    }
+
+    public int getDiscountedPrice() {
+        return discountedPrice;
     }
 }
