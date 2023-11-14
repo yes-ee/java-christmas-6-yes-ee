@@ -61,18 +61,12 @@ public class BenefitService {
     private void applyGiveaway() {
         giveawayService.applyGiveaway(orderPrice);
         addBenefitToList(Benefit.GIVEAWAY_EVENT, giveawayService.getBenefitPrice());
-        addGiveawayMenuToOrderList(giveawayService.getBenefitPrice());
+        giveawayService.addGiveawayMenuToOrderList(menuService);
     }
 
     private void addBenefitToList(Benefit benefit, int benefitPrice) {
         if (benefitPrice != 0) {
             benefitList.put(benefit, benefitPrice);
-        }
-    }
-
-    public void addGiveawayMenuToOrderList(int benefitPrice) {
-        if (benefitPrice != 0) {
-            menuService.addOrder(giveawayService.getGiveawayMenu(), giveawayService.getGiveawayMenuCount());
         }
     }
 

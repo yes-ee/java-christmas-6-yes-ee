@@ -25,15 +25,13 @@ public class GiveawayService {
         benefitPrice = Benefit.GIVEAWAY_EVENT.getPrice();
     }
 
+    public void addGiveawayMenuToOrderList(MenuService menuService) {
+        if (benefitPrice != 0) {
+            menuService.addOrder(this.giveawayMenu, this.giveawayMenuCount);
+        }
+    }
+
     public int getBenefitPrice() {
         return benefitPrice;
-    }
-
-    public Menu getGiveawayMenu() {
-        return giveawayMenu;
-    }
-
-    public int getGiveawayMenuCount() {
-        return giveawayMenuCount;
     }
 }
