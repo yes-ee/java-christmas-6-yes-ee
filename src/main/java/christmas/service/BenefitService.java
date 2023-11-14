@@ -6,17 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BenefitService {
-    int date;
-    int orderPrice;
-    int benefitPrice = 0;
-    Map<Menu, Integer> orderList;
-    Map<Benefit, Integer> benefitList = new HashMap<>();
-    MenuService menuService;
-    DdayDiscountService ddayDiscountService;
-    WeekdayDiscountService weekdayDiscountService;
-    WeekendDiscountService weekendDiscountService;
-    SpecialDiscountService specialDiscountService;
-    GiveawayService giveawayService;
+    private int date;
+    private int orderPrice;
+    private Map<Menu, Integer> orderList;
+    private Map<Benefit, Integer> benefitList = new HashMap<>();
+    private MenuService menuService;
+    private DdayDiscountService ddayDiscountService;
+    private WeekdayDiscountService weekdayDiscountService;
+    private WeekendDiscountService weekendDiscountService;
+    private SpecialDiscountService specialDiscountService;
+    private GiveawayService giveawayService;
 
     public BenefitService(int date, MenuService menuService) {
         this.menuService = menuService;
@@ -70,8 +69,10 @@ public class BenefitService {
         }
     }
 
-    public int getBenefitPrice() {
-        return benefitPrice;
+    public int getBenefitPriceSum() {
+        return benefitList.values().stream()
+            .mapToInt(Integer::intValue)
+            .sum();
     }
 
 

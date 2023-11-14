@@ -21,7 +21,7 @@ public class EventService {
 
     public void applyEvent() {
         benefitService = new BenefitService(date, menuService);
-        badgeService = new BadgeService(benefitService.getBenefitPrice());
+        badgeService = new BadgeService(benefitService.getBenefitPriceSum());
 
         benefitService.applyBenefit();
         badgeService.applyBadge();
