@@ -2,6 +2,7 @@ package christmas;
 
 import christmas.constant.ServiceNumber;
 import christmas.domain.Menu;
+import christmas.service.BenefitService;
 import christmas.service.DdayDiscountService;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -147,5 +148,23 @@ public class BenefitServiceTest {
 
         // then
         assertThat(menuService.getOrderList().keySet()).doesNotContain(Menu.CHAMPAGNE);
+    }
+
+    @DisplayName("총혜택 금액 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1:3023", "2:3123", "3:6246", "4:5346", "25: 8446"}, delimiter = ':')
+    void totalBenefitPrice(int date, int expected) {
+        // given
+        MenuService menuService = new MenuService();
+        menuService.addOrder(Menu.BABY_BACK_RIBS, 1);
+        menuService.addOrder(Menu.CHOCOLATE_CAKE, 1);
+        menuService.addOrder(Menu.ICE_CREAM, 1);
+        BenefitService benefitService = new BenefitService(date, menuService);
+
+        // when
+        benefitService.applyBenefit();
+
+        // then
+        assertThat(benefitService.getBenefitPriceSum()).isEqualTo(expected);
     }
 }
