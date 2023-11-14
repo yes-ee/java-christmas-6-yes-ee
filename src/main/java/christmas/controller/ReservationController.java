@@ -19,7 +19,7 @@ public class ReservationController {
         OutputView.printStartMessage();
         selectDate();
         selectMenu();
-        applyEvent();
+        checkEvent();
         OutputView.printBenefitPreview(dateService.getDate(), menuService);
     }
 
@@ -31,7 +31,7 @@ public class ReservationController {
         menuService.chooseMenu();
     }
 
-    private void applyEvent() {
+    private void checkEvent() {
         eventService = new EventService(
                 dateService.getDate(), menuService.getOrderList(), menuService.getOrderPrice());
 
