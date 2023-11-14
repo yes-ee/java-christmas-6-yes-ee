@@ -4,16 +4,21 @@ import christmas.constant.ServiceNumber;
 import christmas.domain.Benefit;
 
 public class DdayDiscountService {
-    public int applyDiscount(int date) {
+    int benefitPrice = 0;
+
+    public void applyDiscount(int date) {
         if (date > ServiceNumber.DDAY_DISCOUNT_END.getNumber()) {
-            return 0;
+            return;
         }
 
-        return getBenefitPrice(date);
+        calculateBenefitPrice(date);
     }
 
-    private int getBenefitPrice(int date) {
-        return Benefit.DDAY_DISCOUNT.getPrice() + (date - ServiceNumber.DATE_MIN.getNumber()) * 100;
+    private void calculateBenefitPrice(int date) {
+        benefitPrice = Benefit.DDAY_DISCOUNT.getPrice() + (date - ServiceNumber.DATE_MIN.getNumber()) * 100;
     }
 
+    public int getBenefitPrice() {
+        return benefitPrice;
+    }
 }

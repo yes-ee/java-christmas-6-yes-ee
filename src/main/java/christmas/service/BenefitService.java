@@ -21,7 +21,18 @@ public class BenefitService {
     }
 
     public void applyBenefit() {
-        benefitList.put(Benefit.DDAY_DISCOUNT, ddayDiscountService.applyDiscount(date));
+        applyDdayDiscount();
+    }
+
+    private void applyDdayDiscount() {
+        ddayDiscountService.applyDiscount(date);
+        addBenefitToList(Benefit.DDAY_DISCOUNT, ddayDiscountService.getBenefitPrice());
+    }
+
+    private void addBenefitToList(Benefit benefit, int benefitPrice) {
+        if (benefitPrice != 0) {
+            benefitList.put(benefit, benefitPrice);
+        }
     }
 
     public int getBenefitPrice() {
