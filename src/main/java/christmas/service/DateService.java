@@ -26,4 +26,7 @@ public class DateService {
         }
     }
 
+    public int getDate() {
+        return date;
+    }
 }

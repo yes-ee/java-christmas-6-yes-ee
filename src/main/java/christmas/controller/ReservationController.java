@@ -24,7 +24,7 @@ public class ReservationController {
         selectDate();
         selectMenu();
         applyEvent();
-        OutputView.printEventPreview(dateService.getDate(), menuService.getOrderList());
+        OutputView.printBenefitPreview(dateService.getDate(), menuService.getOrderList());
         // 혜택 출력 예정
     }
 

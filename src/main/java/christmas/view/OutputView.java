@@ -14,7 +14,17 @@ public class OutputView {
         System.out.println(ErrorMessage.ERROR_PREFIX.getMessage() + message);
     }
 
-    public static void printOrderList(Map<Menu, Integer> orderList) {
+    public static void printBenefitPreview(int date, Map<Menu, Integer> orderList) {
+        printPreviewStart(date);
+        printOrderList(orderList);
+    }
+
+    private static void printPreviewStart(int date) {
+        System.out.println("12월 " + date + ServiceMessage.OUTPUT_BENEFIT_PREVIEW.getMessage());
+        System.out.println();
+    }
+
+    private static void printOrderList(Map<Menu, Integer> orderList) {
         System.out.println(ServiceMessage.OUTPUT_MENU.getMessage());
 
         for (Menu order : orderList.keySet()) {
