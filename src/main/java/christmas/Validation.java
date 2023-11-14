@@ -74,4 +74,14 @@ public class Validation {
             throw new IllegalArgumentException();
         }
     }
+
+    public static void validateCount(int orderCount) {
+        checkCountRange(orderCount);
+    }
+
+    private static void checkCountRange(int orderCount) {
+        if (orderCount < ServiceNumber.MENU_MIN.getNumber() || orderCount > ServiceNumber.MENU_MAX.getNumber()) {
+            throw new IllegalArgumentException();
+        }
+    }
 }

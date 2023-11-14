@@ -35,7 +35,9 @@ public class MenuService {
 
             Validation.validateSplitOrder(splitOrder);
             Menu orderMenu = Menu.getMenu(splitOrder[0]);
+            int orderCount = Integer.parseInt(splitOrder[1]);
             Validation.validateMenu(orderMenu, orderList);
+            Validation.validateCount(orderCount);
 
             orderList.put(orderMenu, Integer.parseInt(splitOrder[1]));
         }
