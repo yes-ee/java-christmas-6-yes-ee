@@ -90,7 +90,7 @@ public class BenefitServiceTest {
 
     @DisplayName("증정 이벤트 혜택 금액 테스트")
     @Test
-    void giveawayEvent() {
+    void giveawayEventBenefit() {
         // given
         MenuService menuService = new MenuService();
         menuService.addOrder(Menu.BABY_BACK_RIBS, 3);
@@ -103,5 +103,19 @@ public class BenefitServiceTest {
         assertThat(giveawayService.getBenefitPrice()).isEqualTo(Menu.CHAMPAGNE.getPrice());
     }
 
+    @DisplayName("증정 이벤트 증정품 주문 내역 추가 테스트")
+    @Test
+    void giveawayMenuToOrderList() {
+        // given
+        MenuService menuService = new MenuService();
+        menuService.addOrder(Menu.BABY_BACK_RIBS, 3);
+        GiveawayService giveawayService = new GiveawayService();
 
+        // when
+        giveawayService.applyGiveaway(menuService.getOrderPrice());
+        giveawayService.addGiveawayMenuToOrderList(menuService);
+
+        // then
+        assertThat(menuService.getOrderList().get(Menu.CHAMPAGNE)).isEqualTo(1);
+    }
 }
