@@ -7,9 +7,6 @@ public enum ServiceNumber {
     MENU_MAX(20),
     EVENT_MIN_PRICE(10000),
     DDAY_DISCOUNT_END(25),
-    WEEKDAY_DISCOUNT(2023),
-    WEEKEND_DISCOUNT(2023),
-    SPECIAL_DISCOUNT(1000),
     FREE_EVENT_MIN_PRICE(120000);
 
     private int number;
