@@ -5,6 +5,7 @@ import christmas.service.DdayDiscountService;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.service.WeekdayDiscountService;
+import christmas.service.WeekendDiscountService;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
@@ -35,6 +36,25 @@ public class BenefitServiceTest {
     void weekdayDiscount(int date, int expected) {
         // given
         WeekdayDiscountService discountService = new WeekdayDiscountService();
+        Map<Menu, Integer> orderList = new HashMap<>();
+        orderList.put(Menu.CHOCOLATE_CAKE, 1);
+        orderList.put(Menu.ICE_CREAM, 1);
+        orderList.put(Menu.SEAFOOD_PASTA, 1);
+
+        // when
+        discountService.applyDiscount(date, orderList);
+        int discountPrice = discountService.getBenefitPrice();
+
+        // then
+        assertThat(discountPrice).isEqualTo(expected);
+    }
+
+    @DisplayName("주말 할인 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1:2023", "2:2023", "8:2023", "5:0", "11:0", "12:0"}, delimiter = ':')
+    void weekendDiscount(int date, int expected) {
+        // given
+        WeekendDiscountService discountService = new WeekendDiscountService();
         Map<Menu, Integer> orderList = new HashMap<>();
         orderList.put(Menu.CHOCOLATE_CAKE, 1);
         orderList.put(Menu.ICE_CREAM, 1);
