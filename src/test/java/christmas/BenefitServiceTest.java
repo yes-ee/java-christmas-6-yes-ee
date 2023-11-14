@@ -167,4 +167,21 @@ public class BenefitServiceTest {
         // then
         assertThat(benefitService.getBenefitPriceSum()).isEqualTo(expected);
     }
+
+    @DisplayName("총혜택 금액 테스트 샴페인 포함")
+    @ParameterizedTest
+    @CsvSource(value = {"1:32069"}, delimiter = ':')
+    void totalBenefitPriceWithGiveaway(int date, int expected) {
+        // given
+        MenuService menuService = new MenuService();
+        menuService.addOrder(Menu.BABY_BACK_RIBS, 3);
+        menuService.addOrder(Menu.CHOCOLATE_CAKE, 1);
+        menuService.addOrder(Menu.ICE_CREAM, 1);
+        BenefitService benefitService = new BenefitService(date, menuService);
+
+        // when
+        benefitService.applyBenefit();
+        // then
+        assertThat(benefitService.getBenefitPriceSum()).isEqualTo(expected);
+    }
 }
