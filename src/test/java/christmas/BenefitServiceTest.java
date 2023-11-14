@@ -1,15 +1,19 @@
 package christmas;
 
+import christmas.constant.ServiceNumber;
 import christmas.domain.Menu;
 import christmas.service.DdayDiscountService;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.service.GiveawayService;
+import christmas.service.MenuService;
 import christmas.service.SpecialDiscountService;
 import christmas.service.WeekdayDiscountService;
 import christmas.service.WeekendDiscountService;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -83,4 +87,21 @@ public class BenefitServiceTest {
         // then
         assertThat(discountPrice).isEqualTo(expected);
     }
+
+    @DisplayName("증정 이벤트 혜택 금액 테스트")
+    @Test
+    void giveawayEvent() {
+        // given
+        MenuService menuService = new MenuService();
+        menuService.addOrder(Menu.BABY_BACK_RIBS, 3);
+        GiveawayService giveawayService = new GiveawayService();
+
+        // when
+        giveawayService.applyGiveaway(menuService.getOrderPrice());
+
+        // then
+        assertThat(giveawayService.getBenefitPrice()).isEqualTo(Menu.CHAMPAGNE.getPrice());
+    }
+
+
 }
