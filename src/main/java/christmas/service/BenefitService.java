@@ -14,6 +14,7 @@ public class BenefitService {
     DdayDiscountService ddayDiscountService;
     WeekdayDiscountService weekdayDiscountService;
     WeekendDiscountService weekendDiscountService;
+    SpecialDiscountService specialDiscountService;
 
     public BenefitService(int date, Map<Menu, Integer> orderList, int orderPrice) {
         this.date = date;
@@ -22,12 +23,14 @@ public class BenefitService {
         ddayDiscountService = new DdayDiscountService();
         weekdayDiscountService = new WeekdayDiscountService();
         weekendDiscountService = new WeekendDiscountService();
+        specialDiscountService = new SpecialDiscountService();
     }
 
     public void applyBenefit() {
         applyDdayDiscount();
         applyWeekdayDiscount();
         applyWeekendDiscount();
+        applySpecialDiscount();
     }
 
     private void applyDdayDiscount() {
@@ -43,6 +46,11 @@ public class BenefitService {
     private void applyWeekendDiscount() {
         weekendDiscountService.applyDiscount(date, orderList);
         addBenefitToList(Benefit.WEEKEND_DISCOUNT, weekendDiscountService.getBenefitPrice());
+    }
+
+    private void applySpecialDiscount() {
+        specialDiscountService.applyDiscount(date);
+        addBenefitToList(Benefit.SPECIAL_DISCOUNT, specialDiscountService.getBenefitPrice());
     }
 
     private void addBenefitToList(Benefit benefit, int benefitPrice) {
