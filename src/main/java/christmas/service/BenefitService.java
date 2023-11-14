@@ -13,6 +13,7 @@ public class BenefitService {
     Map<Benefit, Integer> benefitList = new HashMap<>();
     DdayDiscountService ddayDiscountService;
     WeekdayDiscountService weekdayDiscountService;
+    WeekendDiscountService weekendDiscountService;
 
     public BenefitService(int date, Map<Menu, Integer> orderList, int orderPrice) {
         this.date = date;
@@ -20,11 +21,13 @@ public class BenefitService {
         this.orderPrice = orderPrice;
         ddayDiscountService = new DdayDiscountService();
         weekdayDiscountService = new WeekdayDiscountService();
+        weekendDiscountService = new WeekendDiscountService();
     }
 
     public void applyBenefit() {
         applyDdayDiscount();
         applyWeekdayDiscount();
+        applyWeekendDiscount();
     }
 
     private void applyDdayDiscount() {
@@ -35,6 +38,11 @@ public class BenefitService {
     private void applyWeekdayDiscount() {
         weekdayDiscountService.applyDiscount(date, orderList);
         addBenefitToList(Benefit.WEEKDAY_DISCOUNT, weekdayDiscountService.getBenefitPrice());
+    }
+
+    private void applyWeekendDiscount() {
+        weekendDiscountService.applyDiscount(date, orderList);
+        addBenefitToList(Benefit.WEEKEND_DISCOUNT, weekendDiscountService.getBenefitPrice());
     }
 
     private void addBenefitToList(Benefit benefit, int benefitPrice) {
