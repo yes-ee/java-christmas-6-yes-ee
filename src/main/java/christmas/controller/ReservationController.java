@@ -23,8 +23,9 @@ public class ReservationController {
         OutputView.printStartMessage();
         selectDate();
         selectMenu();
-        applyDiscount();
-        giveBadge();
+        applyEvent();
+        OutputView.printEventPreview(dateService.getDate(), menuService.getOrderList());
+        // 혜택 출력 예정
     }
 
     private void selectDate() {
@@ -33,13 +34,9 @@ public class ReservationController {
 
     private void selectMenu() {
         menuService.chooseMenu();
-        OutputView.printOrderList(menuService.getOrderList());
-
     }
 
-    private void applyDiscount() {
-    }
+    private void applyEvent() {
 
-    private void giveBadge() {
     }
 }
