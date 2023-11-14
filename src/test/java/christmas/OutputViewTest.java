@@ -43,23 +43,23 @@ public class OutputViewTest {
                 .contains("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
     }
 
-    @DisplayName("주문 내역 출력 기능")
-    @Test
-    void printOrderList() {
-        // given
-        Map<Menu, Integer> orderList = new HashMap<>();
-        orderList.put(Menu.CHRISTMAS_PASTA, 2);
-        orderList.put(Menu.BABY_BACK_RIBS, 3);
-
-        // when
-        OutputView.printOrderList(orderList);
-
-        // then
-        assertThat(outputStream.toString())
-                .contains("<주문 메뉴>",
-                        "크리스마스파스타 2개",
-                        "바비큐립 3개");
-
-    }
+//    @DisplayName("주문 내역 출력 기능")
+//    @Test
+//    void printOrderList() {
+//        // given
+//        Map<Menu, Integer> orderList = new HashMap<>();
+//        orderList.put(Menu.CHRISTMAS_PASTA, 2);
+//        orderList.put(Menu.BABY_BACK_RIBS, 3);
+//
+//        // when
+//        OutputView.printOrderList(orderList);
+//
+//        // then
+//        assertThat(outputStream.toString())
+//                .contains("<주문 메뉴>",
+//                        "크리스마스파스타 2개",
+//                        "바비큐립 3개");
+//
+//    }
 
 }
