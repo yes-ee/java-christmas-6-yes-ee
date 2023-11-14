@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.Menu;
 import christmas.service.EventService;
+import christmas.service.MenuService;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
@@ -17,11 +18,10 @@ public class EventServiceTest {
     void notEventTarget() {
         // given
         int date = 1;
-        Map<Menu, Integer> orderList = new HashMap<>();
-        int orderPrice = 9000;
-        orderList.put(Menu.TAPAS, 1);
-        orderList.put(Menu.ZERO_COLA, 1);
-        EventService eventService = new EventService(date, orderList, orderPrice);
+        MenuService menuService = new MenuService();
+        menuService.addOrder(Menu.TAPAS, 1);
+        int orderPrice = menuService.getOrderPrice();
+        EventService eventService = new EventService(date, menuService);
 
         // when
         boolean isTarget = eventService.isEventTarget(orderPrice);
