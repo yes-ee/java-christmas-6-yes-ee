@@ -17,7 +17,8 @@ public class BenefitServiceTest {
         DdayDiscountService discountService = new DdayDiscountService();
 
         // when
-        int discountPrice = discountService.applyDiscount(date);
+        discountService.applyDiscount(date);
+        int discountPrice = discountService.getBenefitPrice();
 
         // then
         assertThat(discountPrice).isEqualTo(expected);
