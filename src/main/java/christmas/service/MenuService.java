@@ -44,4 +44,14 @@ public class MenuService {
     public Map<Menu, Integer> getOrderList() {
         return orderList;
     }
+
+    public int getOrderPrice() {
+        int orderPrice = 0;
+
+        for (Menu order: orderList.keySet()) {
+            orderPrice += order.getPrice() * orderList.get(order);
+        }
+
+        return orderPrice;
+    }
 }
