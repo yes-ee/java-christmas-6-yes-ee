@@ -9,7 +9,7 @@ public class EventService {
     private Map<Menu, Integer> orderList;
     private int orderPrice;
 
-    private DiscountService discountService;
+    private BenefitService benefitService;
     private BadgeService badgeService;
 
     public EventService(int date, Map<Menu, Integer> orderList, int orderPrice) {
@@ -19,10 +19,10 @@ public class EventService {
     }
 
     public void applyEvent() {
-        discountService = new DiscountService(date, orderList, orderPrice);
-        badgeService = new BadgeService(discountService.getBenefitPrice());
+        benefitService = new BenefitService(date, orderList, orderPrice);
+        badgeService = new BadgeService(benefitService.getBenefitPrice());
 
-        discountService.applyDiscount();
+        benefitService.applyBenefit();
         badgeService.applyBadge();
     }
 

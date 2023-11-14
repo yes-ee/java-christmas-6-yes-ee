@@ -1,6 +1,6 @@
 package christmas.domain;
 
-public enum Discount {
+public enum Benefit {
     DDAY_DISCOUNT("크리스마스 디데이 할인", 1000),
     WEEKDAY_DISCOUNT("평일 할인", 2023),
     WEEKEND_DISCOUNT("주말 할인", 2023),
@@ -10,7 +10,7 @@ public enum Discount {
     private String name;
     private int price;
 
-    Discount(String name, int price) {
+    Benefit(String name, int price) {
         this.name = name;
         this.price = price;
     }

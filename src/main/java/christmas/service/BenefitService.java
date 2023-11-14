@@ -1,27 +1,27 @@
 package christmas.service;
 
-import christmas.domain.Discount;
+import christmas.domain.Benefit;
 import christmas.domain.Menu;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DiscountService {
+public class BenefitService {
     int date;
     int orderPrice;
     int benefitPrice = 0;
     Map<Menu, Integer> orderList;
-    Map<Discount, Integer> discountList = new HashMap<>();
+    Map<Benefit, Integer> benefitList = new HashMap<>();
     DdayDiscountService ddayDiscountService;
 
-    public DiscountService(int date, Map<Menu, Integer> orderList, int orderPrice) {
+    public BenefitService(int date, Map<Menu, Integer> orderList, int orderPrice) {
         this.date = date;
         this.orderList = orderList;
         this.orderPrice = orderPrice;
         ddayDiscountService = new DdayDiscountService();
     }
 
-    public void applyDiscount() {
-        discountList.put(Discount.DDAY_DISCOUNT, ddayDiscountService.applyDiscount(date));
+    public void applyBenefit() {
+        benefitList.put(Benefit.DDAY_DISCOUNT, ddayDiscountService.applyDiscount(date));
     }
 
     public int getBenefitPrice() {

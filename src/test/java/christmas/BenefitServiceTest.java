@@ -7,7 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 @DisplayName("할인 서비스 테스트")
-public class DiscountServiceTest {
+public class BenefitServiceTest {
 
     @DisplayName("크리스마스 디데이 할인 테스트")
     @ParameterizedTest

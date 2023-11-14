@@ -1,7 +1,7 @@
 package christmas.service;
 
 import christmas.constant.ServiceNumber;
-import christmas.domain.Discount;
+import christmas.domain.Benefit;
 
 public class DdayDiscountService {
     public int applyDiscount(int date) {
@@ -13,7 +13,7 @@ public class DdayDiscountService {
     }
 
     private int getBenefitPrice(int date) {
-        return Discount.DDAY_DISCOUNT.getPrice() + (date - ServiceNumber.DATE_MIN.getNumber()) * 100;
+        return Benefit.DDAY_DISCOUNT.getPrice() + (date - ServiceNumber.DATE_MIN.getNumber()) * 100;
     }
 
 }
