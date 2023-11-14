@@ -6,6 +6,10 @@ import christmas.domain.Menu;
 import java.util.Map;
 
 public class OutputView {
+    public static void printStartMessage() {
+        System.out.println(ServiceMessage.SERVICE_START.getMessage());
+    }
+
     public static void printErrorMessage(String message) {
         System.out.println(ErrorMessage.ERROR_PREFIX.getMessage() + message);
     }

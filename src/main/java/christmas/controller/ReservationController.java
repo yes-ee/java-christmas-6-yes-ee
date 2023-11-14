@@ -20,6 +20,7 @@ public class ReservationController {
     }
 
     public void run() {
+        OutputView.printStartMessage();
         selectDate();
         selectMenu();
         applyDiscount();
@@ -33,6 +34,7 @@ public class ReservationController {
     private void selectMenu() {
         menuService.chooseMenu();
         OutputView.printOrderList(menuService.getOrderList());
+
     }
 
     private void applyDiscount() {
