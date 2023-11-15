@@ -34,6 +34,7 @@ public class ReservationController {
                 eventService.getBenefitService().getGiveawayMenu(),
                 eventService.getBenefitService().getGiveawayCount());
         OutputView.printBenefitList(eventService.getBenefitService().getBenefitList());
+        OutputView.printBenefitPrice(eventService.getBenefitService().getTotalBenefitPrice());
     }
 
     private void selectDate() {
