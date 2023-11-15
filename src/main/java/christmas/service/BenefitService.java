@@ -1,6 +1,7 @@
 package christmas.service;
 
 import christmas.domain.Benefit;
+import christmas.domain.Menu;
 import christmas.domain.EventReservation;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +34,6 @@ public class BenefitService {
         applyWeekendDiscount();
         applySpecialDiscount();
         calculateTotalDiscountPrice();
-
         applyGiveaway();
     }
 
@@ -88,6 +88,18 @@ public class BenefitService {
 
     public int getTotalDiscountPrice() {
         return totalDiscountPrice;
+    }
+
+    public Map<Benefit, Integer> getBenefitList() {
+        return benefitList;
+    }
+
+    public Menu getGiveawayMenu() {
+        return giveawayService.getGiveawayMenu();
+    }
+
+    public int getGiveawayCount() {
+        return giveawayService.getGiveawayCount();
     }
 }
 

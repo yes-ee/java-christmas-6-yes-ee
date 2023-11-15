@@ -22,7 +22,17 @@ public class ReservationController {
         selectDate();
         selectMenu();
         checkEvent();
-        OutputView.printBenefitPreview(dateService.getDate(), menuService);
+        printBenefit();
+    }
+
+    private void printBenefit() {
+        OutputView.printPreviewStart(dateService.getDate());
+        OutputView.printOrderList(menuService.getOrderList());
+        OutputView.printOrderPrice(menuService.getOrderPrice());
+        OutputView.printGiveawayMenu(
+                eventService.getBenefitService().getBenefitList(),
+                eventService.getBenefitService().getGiveawayMenu(),
+                eventService.getBenefitService().getGiveawayCount());
     }
 
     private void selectDate() {

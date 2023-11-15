@@ -27,5 +27,8 @@ public class EventService {
         return orderPrice >= ServiceNumber.EVENT_MIN_PRICE.getNumber();
     }
 
+    public BenefitService getBenefitService() {
+        return benefitService;
+    }
 
 }

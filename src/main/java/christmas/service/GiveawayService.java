@@ -8,12 +8,12 @@ import christmas.domain.Menu;
 public class GiveawayService {
     private int benefitPrice;
     private final Menu giveawayMenu;
-    private final int giveawayMenuCount;
+    private final int giveawayCount;
 
     public GiveawayService() {
         this.benefitPrice = 0;
         this.giveawayMenu = Menu.CHAMPAGNE;
-        this.giveawayMenuCount = 1;
+        this.giveawayCount = 1;
     }
 
     public void applyGiveaway(int orderPrice) {
@@ -35,11 +35,19 @@ public class GiveawayService {
 
     public void addGiveawayMenuToOrderList(EventReservation eventReservation) {
         if (benefitPrice != 0) {
-            eventReservation.addOrder(this.giveawayMenu, this.giveawayMenuCount);
+            eventReservation.addOrder(this.giveawayMenu, this.giveawayCount);
         }
     }
 
     public int getBenefitPrice() {
         return benefitPrice;
+    }
+
+    public Menu getGiveawayMenu() {
+        return giveawayMenu;
+    }
+
+    public int getGiveawayCount() {
+        return giveawayCount;
     }
 }
