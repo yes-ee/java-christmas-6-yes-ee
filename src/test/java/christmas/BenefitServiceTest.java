@@ -1,6 +1,5 @@
 package christmas;
 
-import christmas.constant.ServiceNumber;
 import christmas.domain.EventReservation;
 import christmas.domain.Menu;
 import christmas.service.BenefitService;
@@ -14,7 +13,6 @@ import christmas.service.WeekdayDiscountService;
 import christmas.service.WeekendDiscountService;
 import java.util.HashMap;
 import java.util.Map;
-import jdk.jfr.Event;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
