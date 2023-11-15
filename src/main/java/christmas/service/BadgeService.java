@@ -9,6 +9,7 @@ public class BadgeService {
 
     public BadgeService(int benefitPrice) {
         this.benefitPrice = benefitPrice;
+        this.badge = Badge.NOTHING;
     }
 
     public void applyBadge() {

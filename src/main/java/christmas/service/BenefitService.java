@@ -83,6 +83,10 @@ public class BenefitService {
     }
 
     public int getDiscountedPrice() {
+        if (menuService.getOrderPrice() < totalDiscountPrice) {
+            return 0;
+        }
+
         return menuService.getOrderPrice() - totalDiscountPrice;
     }
 

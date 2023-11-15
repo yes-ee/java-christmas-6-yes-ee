@@ -69,9 +69,19 @@ public class OutputView {
         }
     }
 
-    public static void printBenefitList(Map<Benefit, Integer> benefitList) {
-        DecimalFormat formatter = new DecimalFormat("###,###");
+    public static void printBenefitHistory(Map<Benefit, Integer> benefitList) {
         System.out.println(ServiceMessage.OUTPUT_BENEFIT_HISTORY.getMessage());
+
+        if (benefitList.isEmpty()) {
+            System.out.println("없음");
+            System.out.println();
+            return;
+        }
+        printBenefitList(benefitList);
+    }
+
+    private static void printBenefitList(Map<Benefit, Integer> benefitList) {
+        DecimalFormat formatter = new DecimalFormat("###,###");
 
         for (Benefit benefit : benefitList.keySet()) {
             System.out.printf("%s: -%s원", benefit.getName(), formatter.format(benefitList.get(benefit)));
@@ -81,9 +91,16 @@ public class OutputView {
     }
 
     public static void printBenefitPrice(int totalBenefitPrice) {
+        System.out.println(ServiceMessage.OUTPUT_BENEFIT_PRICE.getMessage());
+
+        if (totalBenefitPrice == 0) {
+            System.out.println("없음");
+            System.out.println();
+            return;
+        }
+
         DecimalFormat formatter = new DecimalFormat("###,###");
 
-        System.out.println(ServiceMessage.OUTPUT_BENEFIT_PRICE.getMessage());
         System.out.println("-" + formatter.format(totalBenefitPrice) + "원");
         System.out.println();
     }

@@ -33,7 +33,7 @@ public class ReservationController {
                 eventService.getBenefitService().getBenefitList(),
                 eventService.getBenefitService().getGiveawayMenu(),
                 eventService.getBenefitService().getGiveawayCount());
-        OutputView.printBenefitList(eventService.getBenefitService().getBenefitList());
+        OutputView.printBenefitHistory(eventService.getBenefitService().getBenefitList());
         OutputView.printBenefitPrice(eventService.getBenefitService().getTotalBenefitPrice());
         OutputView.printDiscountedPrice(eventService.getBenefitService().getDiscountedPrice());
         OutputView.printBadge(eventService.getBadgeService().getBadge());
