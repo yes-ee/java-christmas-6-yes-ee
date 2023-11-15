@@ -165,7 +165,7 @@ public class BenefitServiceTest {
         benefitService.applyBenefit();
 
         // then
-        assertThat(benefitService.getBenefitPriceSum()).isEqualTo(expected);
+        assertThat(benefitService.getTotalBenefitPrice()).isEqualTo(expected);
     }
 
     @DisplayName("총혜택 금액 테스트 샴페인 포함")
@@ -182,6 +182,25 @@ public class BenefitServiceTest {
         // when
         benefitService.applyBenefit();
         // then
-        assertThat(benefitService.getBenefitPriceSum()).isEqualTo(expected);
+        assertThat(benefitService.getTotalBenefitPrice()).isEqualTo(expected);
     }
+
+    @DisplayName("할인 금액 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1:3023"}, delimiter = ':')
+    void totalDiscountPrice(int date, int expected) {
+        // given
+        MenuService menuService = new MenuService();
+        menuService.addOrder(Menu.BABY_BACK_RIBS, 1);
+        menuService.addOrder(Menu.CHOCOLATE_CAKE, 1);
+        menuService.addOrder(Menu.ICE_CREAM, 1);
+        BenefitService benefitService = new BenefitService(date, menuService);
+
+        // when
+        benefitService.applyBenefit();
+
+        // then
+        assertThat(benefitService.getTotalDiscountPrice()).isEqualTo(expected);
+    }
+
 }
