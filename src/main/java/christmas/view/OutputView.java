@@ -68,4 +68,14 @@ public class OutputView {
         }
     }
 
+    public static void printBenefitList(Map<Benefit, Integer> benefitList) {
+        DecimalFormat formatter = new DecimalFormat("###,###");
+        System.out.println(ServiceMessage.OUTPUT_BENEFIT_HISTORY.getMessage());
+
+        for (Benefit benefit : benefitList.keySet()) {
+            System.out.printf("%s: -%s원", benefit.getName(), formatter.format(benefitList.get(benefit)));
+            System.out.println();
+        }
+        System.out.println();
+    }
 }

@@ -33,6 +33,7 @@ public class ReservationController {
                 eventService.getBenefitService().getBenefitList(),
                 eventService.getBenefitService().getGiveawayMenu(),
                 eventService.getBenefitService().getGiveawayCount());
+        OutputView.printBenefitList(eventService.getBenefitService().getBenefitList());
     }
 
     private void selectDate() {
