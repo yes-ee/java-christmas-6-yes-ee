@@ -1,4 +1,4 @@
-package christmas;
+package christmas.validation;
 
 import christmas.constant.ServiceNumber;
 import christmas.domain.Menu;

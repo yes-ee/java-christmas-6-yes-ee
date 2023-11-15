@@ -1,6 +1,6 @@
 package christmas.service;
 
-import christmas.Validation;
+import christmas.validation.Validation;
 import christmas.constant.ErrorMessage;
 import christmas.domain.Menu;
 import christmas.view.InputView;

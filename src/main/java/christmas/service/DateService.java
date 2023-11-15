@@ -1,6 +1,6 @@
 package christmas.service;
 
-import static christmas.Validation.validateDate;
+import static christmas.validation.Validation.validateDate;
 
 import christmas.constant.ErrorMessage;
 import christmas.view.InputView;

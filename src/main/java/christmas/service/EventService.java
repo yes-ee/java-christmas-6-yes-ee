@@ -18,9 +18,7 @@ public class EventService {
 
     public void applyEvent() {
         benefitService.applyBenefit();
-
         badgeService.applyBadge(benefitService.getTotalBenefitPrice());
-
         eventReservation.setEventOrderPrice(benefitService.getDiscountedPrice());
     }
 
