@@ -86,4 +86,12 @@ public class OutputView {
         System.out.println("-" + formatter.format(totalBenefitPrice) + "원");
         System.out.println();
     }
+
+    public static void printDiscountedPrice(int discountedPrice) {
+        DecimalFormat formatter = new DecimalFormat("###,###");
+
+        System.out.println(ServiceMessage.OUTPUT_AFTER_DISCOUNT.getMessage());
+        System.out.println(formatter.format(discountedPrice) + "원");
+        System.out.println();
+    }
 }
