@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import christmas.domain.Menu;
+import christmas.service.MenuService;
 import christmas.validation.Validation;
 import java.util.HashMap;
 import java.util.Map;
@@ -92,16 +93,18 @@ public class MenuServiceTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-//    @DisplayName("총주문 금액 계산 기능")
-//    @Test
-//    void orderPrice() {
-//        // given
-//        MenuService menuService = new MenuService();
-//
-//        // when
-//        int orderPrice = menuService.getOrderPrice();
-//
-//        // then
-//        assertThat(orderPrice).isEqualTo(100000);
-//    }
+    @DisplayName("총주문 금액 계산 기능")
+    @Test
+    void orderPrice() {
+        // given
+        MenuService menuService = new MenuService();
+        menuService.addOrder(Menu.BABY_BACK_RIBS, 1);
+        menuService.addOrder(Menu.CAESAR_SALAD, 1);
+
+        // when
+        int orderPrice = menuService.getOrderPrice();
+
+        // then
+        assertThat(orderPrice).isEqualTo(62000);
+    }
 }
