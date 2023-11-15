@@ -36,6 +36,7 @@ public class BenefitService {
         applyWeekdayDiscount();
         applyWeekendDiscount();
         applySpecialDiscount();
+        calculateTotalDiscountPrice();
         applyGiveaway();
     }
 
@@ -71,6 +72,13 @@ public class BenefitService {
         }
     }
 
+    private void calculateTotalDiscountPrice() {
+        totalDiscountPrice =  benefitList.keySet().stream()
+                .filter(benefit -> benefit.getType() == "discount")
+                .mapToInt(benefit -> benefitList.get(benefit))
+                .sum();
+    }
+
     public int getTotalBenefitPrice() {
         return benefitList.values().stream()
             .mapToInt(Integer::intValue)
@@ -78,15 +86,11 @@ public class BenefitService {
     }
 
     public int getDiscountedPrice() {
-        calculateTotalDiscountPrice();
         return menuService.getOrderPrice() - totalDiscountPrice;
     }
 
-    private void calculateTotalDiscountPrice() {
-        totalDiscountPrice =  benefitList.keySet().stream()
-                .filter(benefit -> benefit.getType() == "discount")
-                .mapToInt(benefit -> benefitList.get(benefit))
-                .sum();
+    public int getTotalDiscountPrice() {
+        return totalDiscountPrice;
     }
 }
 
