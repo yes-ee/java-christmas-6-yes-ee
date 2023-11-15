@@ -1,16 +1,14 @@
 package christmas.service;
 
 import christmas.domain.Benefit;
-import christmas.domain.Menu;
+import christmas.domain.EventReservation;
 import java.util.HashMap;
 import java.util.Map;
 
 public class BenefitService {
     private int totalDiscountPrice;
 
-    private int date;
-    private int orderPrice;
-    private Map<Menu, Integer> orderList;
+    private EventReservation eventReservation;
     private Map<Benefit, Integer> benefitList = new HashMap<>();
     private MenuService menuService;
     private DdayDiscountService ddayDiscountService;
@@ -19,11 +17,9 @@ public class BenefitService {
     private SpecialDiscountService specialDiscountService;
     private GiveawayService giveawayService;
 
-    public BenefitService(int date, MenuService menuService) {
+    public BenefitService(EventReservation eventReservation, MenuService menuService) {
         this.menuService = menuService;
-        this.date = date;
-        this.orderList = menuService.getOrderList();
-        this.orderPrice = menuService.getOrderPrice();
+        this.eventReservation = eventReservation;
         ddayDiscountService = new DdayDiscountService();
         weekdayDiscountService = new WeekdayDiscountService();
         weekendDiscountService = new WeekendDiscountService();
@@ -37,33 +33,34 @@ public class BenefitService {
         applyWeekendDiscount();
         applySpecialDiscount();
         calculateTotalDiscountPrice();
+
         applyGiveaway();
     }
 
     private void applyDdayDiscount() {
-        ddayDiscountService.applyDiscount(date);
+        ddayDiscountService.applyDiscount(eventReservation.getDate());
         addBenefitToList(Benefit.DDAY_DISCOUNT, ddayDiscountService.getBenefitPrice());
     }
 
     private void applyWeekdayDiscount() {
-        weekdayDiscountService.applyDiscount(date, orderList);
+        weekdayDiscountService.applyDiscount(eventReservation.getDate(), menuService.getOrderList());
         addBenefitToList(Benefit.WEEKDAY_DISCOUNT, weekdayDiscountService.getBenefitPrice());
     }
 
     private void applyWeekendDiscount() {
-        weekendDiscountService.applyDiscount(date, orderList);
+        weekendDiscountService.applyDiscount(eventReservation.getDate(), menuService.getOrderList());
         addBenefitToList(Benefit.WEEKEND_DISCOUNT, weekendDiscountService.getBenefitPrice());
     }
 
     private void applySpecialDiscount() {
-        specialDiscountService.applyDiscount(date);
+        specialDiscountService.applyDiscount(eventReservation.getDate());
         addBenefitToList(Benefit.SPECIAL_DISCOUNT, specialDiscountService.getBenefitPrice());
     }
 
     private void applyGiveaway() {
-        giveawayService.applyGiveaway(orderPrice);
+        giveawayService.applyGiveaway(menuService.getOrderPrice());
         addBenefitToList(Benefit.GIVEAWAY_EVENT, giveawayService.getBenefitPrice());
-        giveawayService.addGiveawayMenuToOrderList(menuService);
+        giveawayService.addGiveawayMenuToOrderList(eventReservation);
     }
 
     private void addBenefitToList(Benefit benefit, int benefitPrice) {

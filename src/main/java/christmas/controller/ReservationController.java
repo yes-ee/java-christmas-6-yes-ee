@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.EventReservation;
 import christmas.service.DateService;
 import christmas.service.EventService;
 import christmas.service.MenuService;
@@ -9,6 +10,7 @@ public class ReservationController {
     private DateService dateService;
     private MenuService menuService;
     private EventService eventService;
+    private EventReservation eventReservation;
 
      public ReservationController() {
         dateService = new DateService();
@@ -32,8 +34,9 @@ public class ReservationController {
     }
 
     private void checkEvent() {
-        eventService = new EventService(
-                dateService.getDate(), menuService);
+        eventReservation = new EventReservation(
+                dateService.getDate(), menuService.getOrderList(), menuService.getOrderPrice());
+        eventService = new EventService(eventReservation, menuService);
 
         if (!eventService.isEventTarget(menuService.getOrderPrice())) {
             return;

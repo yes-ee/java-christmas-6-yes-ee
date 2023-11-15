@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class MenuService {
     private Map<Menu, Integer> orderList = new HashMap<>();
+    private int orderPrice;
 
     public void chooseMenu() {
         boolean isMenuValid = false;
@@ -54,7 +55,7 @@ public class MenuService {
     }
 
     public int getOrderPrice() {
-        int orderPrice = 0;
+        orderPrice = 0;
 
         for (Menu order: orderList.keySet()) {
             orderPrice += order.getPrice() * orderList.get(order);

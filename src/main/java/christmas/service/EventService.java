@@ -1,24 +1,26 @@
 package christmas.service;
 
 import christmas.constant.ServiceNumber;
+import christmas.domain.EventReservation;
 
 public class EventService {
-    int date;
+    private EventReservation eventReservation;
     private MenuService menuService;
     private BenefitService benefitService;
     private BadgeService badgeService;
 
-    public EventService(int date, MenuService menuService) {
+    public EventService(EventReservation eventReservation, MenuService menuService) {
+        this.eventReservation = eventReservation;
         this.menuService = menuService;
-        this.date = date;
     }
 
     public void applyEvent() {
-        benefitService = new BenefitService(date, menuService);
+        benefitService = new BenefitService(eventReservation, menuService);
         badgeService = new BadgeService(benefitService.getTotalBenefitPrice());
 
         benefitService.applyBenefit();
         badgeService.applyBadge();
+        eventReservation.setEventOrderPrice(benefitService.getDiscountedPrice());
     }
 
     public boolean isEventTarget(int orderPrice) {
