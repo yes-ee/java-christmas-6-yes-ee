@@ -14,10 +14,10 @@ public class BadgeServiceTest {
     @CsvSource(value = {"5000:별", "15000:트리", "30000:산타"}, delimiter = ':')
     void giveBadge(int price, String expected) {
         // given
-        BadgeService badgeService = new BadgeService(price);
+        BadgeService badgeService = new BadgeService();
 
         // when
-        badgeService.applyBadge();
+        badgeService.applyBadge(price);
 
         // then
         assertThat(badgeService.getBadge().getName()).isEqualTo(expected);

@@ -12,14 +12,14 @@ public class EventService {
     public EventService(EventReservation eventReservation, MenuService menuService) {
         this.eventReservation = eventReservation;
         this.menuService = menuService;
+        benefitService = new BenefitService(eventReservation, menuService);
+        badgeService = new BadgeService();
     }
 
     public void applyEvent() {
-        benefitService = new BenefitService(eventReservation, menuService);
         benefitService.applyBenefit();
 
-        badgeService = new BadgeService(benefitService.getTotalBenefitPrice());
-        badgeService.applyBadge();
+        badgeService.applyBadge(benefitService.getTotalBenefitPrice());
 
         eventReservation.setEventOrderPrice(benefitService.getDiscountedPrice());
     }

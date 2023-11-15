@@ -4,15 +4,13 @@ package christmas.service;
 import christmas.domain.Badge;
 
 public class BadgeService {
-    int benefitPrice;
     Badge badge;
 
-    public BadgeService(int benefitPrice) {
-        this.benefitPrice = benefitPrice;
+    public BadgeService() {
         this.badge = Badge.NOTHING;
     }
 
-    public void applyBadge() {
+    public void applyBadge(int benefitPrice) {
         if (benefitPrice >= Badge.SANTA.getBenefitPrice()) {
             badge = Badge.SANTA;
         } else if (benefitPrice >= Badge.TREE.getBenefitPrice()) {
