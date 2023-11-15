@@ -36,6 +36,7 @@ public class ReservationController {
         OutputView.printBenefitList(eventService.getBenefitService().getBenefitList());
         OutputView.printBenefitPrice(eventService.getBenefitService().getTotalBenefitPrice());
         OutputView.printDiscountedPrice(eventService.getBenefitService().getDiscountedPrice());
+        OutputView.printBadge(eventService.getBadgeService().getBadge());
     }
 
     private void selectDate() {

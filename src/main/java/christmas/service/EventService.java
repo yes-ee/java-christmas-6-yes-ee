@@ -16,10 +16,11 @@ public class EventService {
 
     public void applyEvent() {
         benefitService = new BenefitService(eventReservation, menuService);
-        badgeService = new BadgeService(benefitService.getTotalBenefitPrice());
-
         benefitService.applyBenefit();
+
+        badgeService = new BadgeService(benefitService.getTotalBenefitPrice());
         badgeService.applyBadge();
+
         eventReservation.setEventOrderPrice(benefitService.getDiscountedPrice());
     }
 
@@ -31,4 +32,7 @@ public class EventService {
         return benefitService;
     }
 
+    public BadgeService getBadgeService() {
+        return badgeService;
+    }
 }

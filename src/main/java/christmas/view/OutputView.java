@@ -2,6 +2,7 @@ package christmas.view;
 
 import christmas.constant.ErrorMessage;
 import christmas.constant.ServiceMessage;
+import christmas.domain.Badge;
 import christmas.domain.Benefit;
 import christmas.domain.Menu;
 import christmas.service.BenefitService;
@@ -92,6 +93,12 @@ public class OutputView {
 
         System.out.println(ServiceMessage.OUTPUT_AFTER_DISCOUNT.getMessage());
         System.out.println(formatter.format(discountedPrice) + "원");
+        System.out.println();
+    }
+
+    public static void printBadge(Badge badge) {
+        System.out.println(ServiceMessage.OUTPUT_BADGE.getMessage());
+        System.out.println(badge.getName());
         System.out.println();
     }
 }
