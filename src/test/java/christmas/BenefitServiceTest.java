@@ -214,4 +214,21 @@ public class BenefitServiceTest {
         assertThat(benefitService.getTotalDiscountPrice()).isEqualTo(expected);
     }
 
+    @DisplayName("할인 후 금액 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1:157931"}, delimiter = ':')
+    void discountedPrice(int date, int expected) {
+        // given
+        MenuService menuService = new MenuService();
+        menuService.addOrder(Menu.T_BONE_STEAK, 3);
+        EventReservation eventReservation = new EventReservation(
+                date, menuService.getOrderList(), menuService.getOrderPrice());
+        BenefitService benefitService = new BenefitService(eventReservation, menuService);
+
+        // when
+        benefitService.applyBenefit();
+
+        // then
+        assertThat(benefitService.getDiscountedPrice()).isEqualTo(expected);
+    }
 }
