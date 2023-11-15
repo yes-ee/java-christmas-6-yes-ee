@@ -2,11 +2,10 @@ package christmas;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.domain.EventReservation;
 import christmas.domain.Menu;
 import christmas.service.EventService;
 import christmas.service.MenuService;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,11 +19,12 @@ public class EventServiceTest {
         int date = 1;
         MenuService menuService = new MenuService();
         menuService.addOrder(Menu.TAPAS, 1);
-        int orderPrice = menuService.getOrderPrice();
-        EventService eventService = new EventService(date, menuService);
+        EventReservation eventReservation = new EventReservation(
+                date, menuService.getOrderList(), menuService.getOrderPrice());
+        EventService eventService = new EventService(eventReservation, menuService);
 
         // when
-        boolean isTarget = eventService.isEventTarget(orderPrice);
+        boolean isTarget = eventService.isEventTarget(menuService.getOrderPrice());
 
         // then
         assertThat(isTarget).isFalse();

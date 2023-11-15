@@ -1,6 +1,7 @@
 package christmas;
 
 import christmas.constant.ServiceNumber;
+import christmas.domain.EventReservation;
 import christmas.domain.Menu;
 import christmas.service.BenefitService;
 import christmas.service.DdayDiscountService;
@@ -13,6 +14,7 @@ import christmas.service.WeekdayDiscountService;
 import christmas.service.WeekendDiscountService;
 import java.util.HashMap;
 import java.util.Map;
+import jdk.jfr.Event;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -110,14 +112,16 @@ public class BenefitServiceTest {
         // given
         MenuService menuService = new MenuService();
         menuService.addOrder(Menu.BABY_BACK_RIBS, 3);
+        EventReservation eventReservation = new EventReservation(
+                1, menuService.getOrderList(), menuService.getOrderPrice());
         GiveawayService giveawayService = new GiveawayService();
 
         // when
         giveawayService.applyGiveaway(menuService.getOrderPrice());
-        giveawayService.addGiveawayMenuToOrderList(menuService);
+        giveawayService.addGiveawayMenuToOrderList(eventReservation);
 
         // then
-        assertThat(menuService.getOrderList().get(Menu.CHAMPAGNE)).isEqualTo(1);
+        assertThat(eventReservation.getEventOrderList().get(Menu.CHAMPAGNE)).isEqualTo(1);
     }
 
     @DisplayName("증정 이벤트 해당 안 되는 경우 금액 확인")
@@ -159,7 +163,9 @@ public class BenefitServiceTest {
         menuService.addOrder(Menu.BABY_BACK_RIBS, 1);
         menuService.addOrder(Menu.CHOCOLATE_CAKE, 1);
         menuService.addOrder(Menu.ICE_CREAM, 1);
-        BenefitService benefitService = new BenefitService(date, menuService);
+        EventReservation eventReservation = new EventReservation(
+                date, menuService.getOrderList(), menuService.getOrderPrice());
+        BenefitService benefitService = new BenefitService(eventReservation, menuService);
 
         // when
         benefitService.applyBenefit();
@@ -177,10 +183,13 @@ public class BenefitServiceTest {
         menuService.addOrder(Menu.BABY_BACK_RIBS, 3);
         menuService.addOrder(Menu.CHOCOLATE_CAKE, 1);
         menuService.addOrder(Menu.ICE_CREAM, 1);
-        BenefitService benefitService = new BenefitService(date, menuService);
+        EventReservation eventReservation = new EventReservation(
+                date, menuService.getOrderList(), menuService.getOrderPrice());
+        BenefitService benefitService = new BenefitService(eventReservation, menuService);
 
         // when
         benefitService.applyBenefit();
+
         // then
         assertThat(benefitService.getTotalBenefitPrice()).isEqualTo(expected);
     }
@@ -194,7 +203,9 @@ public class BenefitServiceTest {
         menuService.addOrder(Menu.BABY_BACK_RIBS, 1);
         menuService.addOrder(Menu.CHOCOLATE_CAKE, 1);
         menuService.addOrder(Menu.ICE_CREAM, 1);
-        BenefitService benefitService = new BenefitService(date, menuService);
+        EventReservation eventReservation = new EventReservation(
+                date, menuService.getOrderList(), menuService.getOrderPrice());
+        BenefitService benefitService = new BenefitService(eventReservation, menuService);
 
         // when
         benefitService.applyBenefit();
